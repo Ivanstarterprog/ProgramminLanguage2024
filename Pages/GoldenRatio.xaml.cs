@@ -13,25 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProgrammingLanguage2024
+namespace ProgrammingLanguage2024.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для GoldenRatio.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GoldenRatio : Page
     {
-        public MainWindow()
+        public GoldenRatio()
         {
             InitializeComponent();
-        }
-
-        private void sidebar_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            var selected = sidebar.SelectedItem as NavButton;
-
-            navframe.Navigate(selected.Navlink);
-
         }
     }
 }

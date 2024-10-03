@@ -11,9 +11,9 @@
             <ColumnDefinition MaxWidth="200px" MinWidth="170px"/>
             <ColumnDefinition MinWidth="500px" MaxWidth="1920 px"/>
         </Grid.ColumnDefinitions>
-        <ListBox Grid.Column="0" Background="Black" SelectionMode="Single" Padding="15px" Grid.ColumnSpan="2">
-            <local:NavButton TextOfButton ="Метод Дихтомии"/>
-            <local:NavButton TextOfButton ="Золотое сечение"/>
+        <ListBox Grid.Column="0" SelectionChanged="sidebar_SelectionChanged" x:Name="sidebar" Background="Black" SelectionMode="Single" Padding="15px" Grid.ColumnSpan="2">
+            <local:NavButton  TextOfButton ="Метод Дихтомии"/>
+            <local:NavButton Navlink="/Pages/GoldenRatio.xaml" TextOfButton ="Золотое сечение"/>
         </ListBox>
         
         <Frame Grid.Column="1" x:Name="navframe" NavigationUIVisibility="Hidden" Background="#e9ecef"/>
