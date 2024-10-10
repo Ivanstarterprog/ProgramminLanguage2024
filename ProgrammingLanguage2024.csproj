@@ -72,6 +72,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converter.cs" />
+    <Compile Include="Methods\NewtonMethod.cs" />
     <Compile Include="Views\BaseViewModel.cs" />
     <Compile Include="Views\DelegateCommand.cs" />
     <Compile Include="Views\MathViewModel.cs" />
@@ -87,7 +88,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\GoldenRatio.xaml">
+    <Page Include="Pages\Newtone.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -98,10 +99,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Methods\Base.cs" />
-    <Compile Include="Methods\GoldenRatioMethod.cs" />
     <Compile Include="NavButton.cs" />
-    <Compile Include="Pages\GoldenRatio.xaml.cs">
-      <DependentUpon>GoldenRatio.xaml</DependentUpon>
+    <Compile Include="Pages\Newtone.xaml.cs">
+      <DependentUpon>Newtone.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -23,20 +23,51 @@ namespace ProgrammingLanguage2024.Methods
         public double BeginInterval = -10;
         public double EndInterval = 10;
 
-        public abstract string CalculateMinResult();
-        public abstract string CalculateMaxResult();
-        public bool IsFunctionContinuous()
-        {
-            if (Points.Count > 0)
-            {
+        protected int _countOfZeros;
 
+        public BaseNumericalMethod()
+        {
+
+        }
+
+        public BaseNumericalMethod(BaseNumericalMethod method)
+        {
+            A = method.A;
+            B = method.B;
+            Epsilon = method.Epsilon;
+            BeginInterval = method.BeginInterval;
+            EndInterval = method.EndInterval;
+            FunctionString = method.FunctionString;
+        }
+
+        public virtual string CalculateResult()
+        {
+            string result = "";
+            if (_countOfZeros > 1)
+            {
+                result += "Внимание! Функция содержит больше одного корня. Расчет может быть некорректен.\n";
             }
 
-            return true;
+            return result;
         }
-        protected double GetResultFromFunction(Function function, double value)
+
+        protected double GetResultFromFunction(Function function, double value, bool derivative = false)
         {
-            return (new Expression($"f({value.ToString().Replace(",", ".")})", function)).calculate();
+            if (derivative)
+            {
+                Expression derivExpression = new Expression($"der({FunctionString}, x, {FormatDouble(value)})");
+                return derivExpression.calculate();
+            }
+            else
+            {
+                return (new Expression($"f({FormatDouble(value)})", function)).calculate();
+
+            }
+        }
+
+        protected string FormatDouble(double value)
+        {
+            return value.ToString().Replace(",", ".");
         }
 
         public LineSeries MakeXLine()
@@ -101,11 +132,26 @@ namespace ProgrammingLanguage2024.Methods
         {
             Points = new List<DataPoint>();
             Function parsedFunction = GetFunction();
+            double prevY = 0;
 
             for (double counterI = BeginInterval; counterI <= EndInterval; counterI += 0.15)
             {
                 Expression e1 = new Expression($"f({counterI.ToString().Replace(",", ".")})", parsedFunction);
-                Points.Add(new DataPoint(counterI, e1.calculate()));
+                double newY = e1.calculate();
+                Points.Add(new DataPoint(counterI, newY));
+
+                if (newY == 0)
+                {
+                    _countOfZeros += 1;
+                }
+                else if (prevY != 0)
+                {
+                    if (prevY * newY < 0)
+                    {
+                        _countOfZeros += 1;
+                    }
+                }
+                prevY = newY;
             }
         }
     }

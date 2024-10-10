@@ -19,7 +19,7 @@
 
         <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="200">
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-                <Label Width="80" Target="{Binding ElementName=FunctionString}">Функция</Label>
+                <Label Width="80" Target="{Binding ElementName=FunctionString}">f(x) = </Label>
                 <TextBox MinWidth ="220px"  Grid.Row="0" Grid.Column="1" Name="FunctionString"  Text="{Binding FunctionString}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
@@ -33,10 +33,6 @@
             <StackPanel Orientation="Horizontal">
                 <Label Width="80" Target="{Binding ElementName=EpsilonTextBox}">E</Label>
                 <TextBox MinWidth ="220px"  Grid.Row="0" Grid.Column="1" Name="EpsilonTextBox"  Text="{Binding Epsilon}"/>
-            </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                <RadioButton GroupName="Min/Max" Content="Максимум" IsChecked="{Binding MinMax}"/>
-                <RadioButton GroupName="Min/Max" Content="Минимум"/>
             </StackPanel>
             <TextBox x:Name="ResultTextBox" IsReadOnly="True" MinHeight="200px" TextAlignment="Center" Text="{Binding Result}"/>
         </StackPanel>

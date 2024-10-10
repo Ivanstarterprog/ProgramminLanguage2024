@@ -12,9 +12,9 @@ namespace ProgrammingLanguage2024.Views
 {
     public class MathViewModel : BaseViewModel
     {
-        BaseNumericalMethod method = new GoldenRatioMethod();
+        BaseNumericalMethod method = new NewtonMethod();
 
-        private string _chosenMethod = "G";
+        private string _chosenMethod = "N";
         public string ChosenMethod
         {
             get { return _chosenMethod; }
@@ -23,8 +23,8 @@ namespace ProgrammingLanguage2024.Views
                 _chosenMethod = value;
                 switch (_chosenMethod)
                 {
-                    case "G":
-                        method = new GoldenRatioMethod();
+                    case "N":
+                        method = new NewtonMethod(method);
                         break;
                 }
                 Set(ref _chosenMethod, value);
@@ -128,14 +128,7 @@ namespace ProgrammingLanguage2024.Views
 
                 return new DelegateCommand((obj) =>
                 {
-                    if (_minMax.ToString() == "False")
-                    {
-                        Result = method.CalculateMinResult();
-                    }
-                    else
-                    {
-                        Result = method.CalculateMaxResult();
-                    }
+                    Result = method.CalculateResult();
                 });
             }
         }

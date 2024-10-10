@@ -12,8 +12,7 @@
             <ColumnDefinition MinWidth="500px" MaxWidth="1920 px"/>
         </Grid.ColumnDefinitions>
         <ListBox Grid.Column="0" SelectionChanged="sidebar_SelectionChanged" x:Name="sidebar" Background="Black" SelectionMode="Single" Padding="15px" Grid.ColumnSpan="2">
-            <local:NavButton  TextOfButton ="Метод Дихтомии"/>
-            <local:NavButton Navlink="/Pages/GoldenRatio.xaml" TextOfButton ="Золотое сечение"/>
+            <local:NavButton Navlink="/Pages/Newtone.xaml" TextOfButton ="Метод Ньютона"/>
         </ListBox>
         
         <Frame Grid.Column="1" x:Name="navframe" NavigationUIVisibility="Hidden" Background="#e9ecef"/>
