@@ -18,9 +18,9 @@ namespace ProgrammingLanguage2024.Pages
     /// <summary>
     /// Логика взаимодействия для GoldenRatio.xaml
     /// </summary>
-    public partial class Newtone : Page
+    public partial class GoldenRatio : Page
     {
-        public Newtone()
+        public GoldenRatio()
         {
             InitializeComponent();
             MethodButton.IsChecked = true;

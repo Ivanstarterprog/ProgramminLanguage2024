@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ProgrammingLanguage2024.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для GoldenRatio.xaml
+    /// Логика взаимодействия для Dihtomy.xaml
     /// </summary>
-    public partial class Newtone : Page
+    public partial class Dihtomy : Page
     {
-        public Newtone()
+        public Dihtomy()
         {
             InitializeComponent();
             MethodButton.IsChecked = true;

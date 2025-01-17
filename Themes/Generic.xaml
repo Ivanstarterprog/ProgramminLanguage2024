@@ -2,19 +2,36 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:ProgrammingLanguage2024">
+    <Style TargetType="Label">
+        <Setter Property="FontSize" Value="52"/>
+    </Style>
+    <Style TargetType="TextBlock">
+        <Setter Property="FontSize" Value="52"/>
+    </Style>
     <Style TargetType="{x:Type local:NavButton}">
-        <Setter Property="TextBlock.FontFamily" Value="Fonts/#New_Zelek"/>
+
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Padding" Value="5px"/>
+        <Setter Property="Margin" Value="3px"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:NavButton}">
-                    <Border>
-                        <TextBlock FontFamily="{DynamicResource CyberPunk}" Foreground="White" FontSize="18" Name="ButtonText" Text="{TemplateBinding TextOfButton}"/>
+                    <Border x:Name="back" CornerRadius="8" Margin="5px" Padding="{TemplateBinding Padding}" Background="#242B71" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Path x:Name="icon" Height="87px" Width="87px" Stretch="Uniform" Fill="White" Data="{TemplateBinding Icon}"/>
                     </Border>
                     <ControlTemplate.Triggers>
+
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Cursor" Value="Hand"/>
-                            <Setter Property="Foreground" Value="#FEC600" TargetName="ButtonText"/>
+                            <Setter Property="Background" TargetName="back" Value="#d0ebff"/>
+                            <Setter Property="Fill" TargetName="icon" Value="#2a84f1"/>
                         </Trigger>
+
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" TargetName="back" Value="#d0ebff"/>
+                            <Setter Property="Fill" TargetName="icon" Value="#2a84f1"/>
+                        </Trigger>
+
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

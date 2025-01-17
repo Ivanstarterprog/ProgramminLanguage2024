@@ -11,14 +11,25 @@ namespace ProgrammingLanguage2024.Methods
     {
         public NewtonMethod() { }
 
-        public NewtonMethod(BaseNumericalMethod method) : base(method) { }
+        public NewtonMethod(BaseNumericalMethod method) : base(method)
+        {
+            A.Hint = "Первое приближение";
+            B.Hint = "Кол-во итераций";
+            Description = "Использует производную функции для нахождения экстремума. " +
+                        "Метод находит точку, где производная равна нулю, что является экстремумом.";
+        }
 
         public override string CalculateResult()
         {
             string result = base.CalculateResult();
 
-            double x = A;
-            int countOfIterations = (int)B;
+            if (result == NO_ZEROS)
+            {
+                return result;
+            }
+
+            double x = A.Value;
+            int countOfIterations = (int)B.Value;
             int currentIterationIndex = 0;
 
             for (int iterationIndex = 0; iterationIndex < countOfIterations; ++iterationIndex)

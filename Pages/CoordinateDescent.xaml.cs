@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ProgrammingLanguage2024.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для GoldenRatio.xaml
+    /// Логика взаимодействия для CoordinateDescent.xaml
     /// </summary>
-    public partial class Newtone : Page
+    public partial class CoordinateDescent : Page
     {
-        public Newtone()
+        public CoordinateDescent()
         {
             InitializeComponent();
             MethodButton.IsChecked = true;

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 
@@ -12,9 +13,9 @@ namespace ProgrammingLanguage2024.Views
 {
     public class MathViewModel : BaseViewModel
     {
-        BaseNumericalMethod method = new NewtonMethod();
+        BaseNumericalMethod method = new DihotomyMethod();
 
-        private string _chosenMethod = "N";
+        private string _chosenMethod = "D";
         public string ChosenMethod
         {
             get { return _chosenMethod; }
@@ -23,25 +24,26 @@ namespace ProgrammingLanguage2024.Views
                 _chosenMethod = value;
                 switch (_chosenMethod)
                 {
+                    case "D":
+                        method = new DihotomyMethod(method);
+                        break;
+                    case "G":
+                        method = new GoldenRatioMethod(method);
+                        break;
                     case "N":
                         method = new NewtonMethod(method);
                         break;
+                    case "C":
+                        method = new CoordinateDescentMethod(method);
+                        break;
                 }
+                OnPropertyChanged(nameof(method.Description));
+                OnPropertyChanged(nameof(method.A));
+                OnPropertyChanged(nameof(method.B));
+                OnPropertyChanged(nameof(method.C));
                 Set(ref _chosenMethod, value);
             }
         }
-
-        private string _minMax = "False";
-        public string MinMax
-        {
-            get { return _minMax; }
-            set
-            {
-                _minMax = value;
-                Set(ref _minMax, value);
-            }
-        }
-
 
         public string FunctionString
         {
@@ -63,23 +65,38 @@ namespace ProgrammingLanguage2024.Views
             }
         }
 
-        public double A
+        public string Description
+        {
+            get { return method.Description; }
+        }
+
+        public BindedValue<double> A
         {
             get { return method.A; }
             set
             {
-                method.A = Convert.ToDouble(value);
+                method.A.Value = Convert.ToDouble(value);
                 OnPropertyChanged(nameof(method.A));
             }
         }
 
-        public double B
+        public BindedValue<double> B
         {
             get { return method.B; }
             set
             {
-                method.B = Convert.ToDouble(value);
+                method.B.Value = Convert.ToDouble(value);
                 OnPropertyChanged(nameof(method.B));
+            }
+        }
+
+        public BindedValue<double> C
+        {
+            get { return method.C; }
+            set
+            {
+                method.C.Value = Convert.ToDouble(value);
+                OnPropertyChanged(nameof(method.C));
             }
         }
 
@@ -125,21 +142,10 @@ namespace ProgrammingLanguage2024.Views
         {
             get
             {
-
-                return new DelegateCommand((obj) =>
-                {
-                    Result = method.CalculateResult();
-                });
-            }
-        }
-
-        public ICommand CalculateFunction
-        {
-            get
-            {
                 return new DelegateCommand((obj) =>
                 {
                     Plot = method.CalculateGraph();
+                    Result = method.CalculateResult();
                 });
             }
         }
@@ -151,9 +157,31 @@ namespace ProgrammingLanguage2024.Views
                 return new DelegateCommand((obj) =>
                 {
                     FunctionString = "";
-                    A = 0;
-                    B = 0;
+                    A.Value = 0;
+                    B.Value = 0;
+                    C.Value = 0;
                     Epsilon = 0;
+                });
+            }
+        }
+
+        public KeyEventHandler KeyDown
+        {
+            get
+            {
+                return new KeyEventHandler((object sender, KeyEventArgs e) =>
+                {
+                    TextBox textBox = sender as TextBox;
+                    if (textBox != null)
+                    {
+                        if (e.Key == Key.Return)
+                        {
+                            if (e.Key == Key.Enter)
+                            {
+                                textBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+                            }
+                        }
+                    }
                 });
             }
         }
